@@ -4,7 +4,7 @@ on:
     branches: [development]  # podajemy branche, na ktorych zmiany powoduja wywolanie pipline, mozna podawac jako tablice[], albo jako liste -
   pull_request:
     branches:   # podajemy branche, do ktorych PR wywoluja uruchomienie
-      - development
+      - master
 jobs:
   build:
     runs-on: windows-latest
