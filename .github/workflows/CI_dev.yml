@@ -1,0 +1,23 @@
+name: CI
+on:
+  push:
+    branches: [development]  # podajemy branche, na ktorych zmiany powoduja wywolanie pipline, mozna podawac jako tablice[], albo jako liste -
+  pull_request:
+    branches:   # podajemy branche, do ktorych PR wywoluja uruchomienie
+      - development
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v3 # wybrane z marketplace, instalacja SDK
+        with:
+          dotnet-version: 8.0.x
+      - name: Restore dependencies # odtworzenie paczek Nuget
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --no-restore  # budowanie projektu, flaga no-restore -> pobranie paczek w poprzednim kroku
+      - name: Test # uruchomienie testow w projekcie
+        run: dotnet test
+
