@@ -1,4 +1,5 @@
 using AutoMapper;
+using Azure.Identity;
 using Mango.Services.CouponAPI;
 using Mango.Services.CouponAPI.Data;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +7,11 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//builder.Configuration.AddAzureKeyVault(
+//    new Uri($"https://{builder.Configuration["KeyVaultName"]}.vault.azure.net/"),
+//    new DefaultAzureCredential());
+
+//var connectionString = builder.Configuration.GetValue<string>("ConnectionsString:DefaultConnection");
 // Add services to the container.
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
@@ -19,6 +25,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
 
 var app = builder.Build();
 
