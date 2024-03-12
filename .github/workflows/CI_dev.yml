@@ -5,6 +5,7 @@ on:
   pull_request:
     branches:   # podajemy branche, do ktorych PR wywoluja uruchomienie
       - development
+      - master
 jobs:
   build:
     runs-on: windows-latest
