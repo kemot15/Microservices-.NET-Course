@@ -1,18 +1,13 @@
 using AutoMapper;
-using Mango.Services.CouponAPI;
-using Mango.Services.CouponAPI.Data;
-using Mango.Services.CouponAPI.Extentions;
+using Mango.Services.ProductAPI;
+using Mango.Services.ProductAPI.Data;
+using Mango.Services.ProductAPI.Extentions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//builder.Configuration.AddAzureKeyVault(
-//    new Uri($"https://{builder.Configuration["KeyVaultName"]}.vault.azure.net/"),
-//    new DefaultAzureCredential());
-
-//var connectionString = builder.Configuration.GetValue<string>("ConnectionsString:DefaultConnection");
 // Add services to the container.
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
@@ -54,8 +49,6 @@ builder.Services.AddSwaggerGen(options =>
 builder.AddAppAuthentication();
 builder.Services.AddAuthorization();
 
-
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -66,8 +59,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseAuthentication();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
