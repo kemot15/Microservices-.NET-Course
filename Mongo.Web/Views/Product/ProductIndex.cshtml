@@ -24,17 +24,18 @@
 						Name
 					</th>
 					<th>
-						Price
-					</th>
-					<th>
-						Description
-					</th>
-					<th>
 						Category
 					</th>
 					<th>
-						Image Url
+						Price
 					</th>
+					@* <th>
+						Description
+					</th>
+					
+					<th>
+						Image Url
+					</th> *@
 					<th></th>
 				</tr>
 			</thead>
@@ -46,18 +47,22 @@
 								@item.Name
 							</td>
 							<td>
+								@item.CategoryName
+							</td>
+							<td>
 								@(item.Price.ToString("c"))
 							</td>
-							<td>
+							@* <td>
 								@item.Description
 							</td>
-							<td>
-							@item.CategoryName
-							</td>
+							
 							<td>
 							@item.ImageUrl
-							</td>
+							</td> *@
 							<td>
+								<a asp-action="ProductEdit" asp-route-productId="@item.ProductId" class="btn btn-success" >
+									<i class="bi bi-pencil-square"></i>
+								</a>
 								<a asp-action="ProductDelete" asp-route-productId="@item.ProductId" class="btn btn-danger" >
 									<i class="bi bi-trash"></i>
 								</a>
